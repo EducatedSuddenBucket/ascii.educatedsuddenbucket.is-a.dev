@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Players</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Players on the Server</h1>
+    <ul id="player-list"></ul>
+
+    <script>
+        // Replace with your actual server address
+        const serverAddress = "N5.MCST.IO:25597"; // Change this to your server address
+
+        // Fetch player data from MCSrvStat API
+        fetch(`https://api.mcsrvstat.us/3/${serverAddress}`)
+            .then(response => response.json())
+            .then(data => {
+                const playerList = document.getElementById("player-list");
+
+                if (data.online === false) {
+                    const errorItem = document.createElement("li");
+                    errorItem.textContent = "Server Offline";
+                    playerList.appendChild(errorItem);
+                } else if (data.players && data.players.list && data.players.list.length === 0) {
+                    const errorItem = document.createElement("li");
+                    errorItem.textContent = "No Players Found";
+                    playerList.appendChild(errorItem);
+                } else if (data.players && data.players.list) {
+                    data.players.list.forEach(player => {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = player;
+                        playerList.appendChild(listItem);
+                    });
+                } else {
+                    const errorItem = document.createElement("li");
+                    errorItem.textContent = "Unable to fetch player data.";
+                    playerList.appendChild(errorItem);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching player data:", error);
+            });
+    </script>
+</body>
+</html>
