@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+        .status-circle {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        .online {
+            background-color: #00ff00; /* Green */
+        }
+        .offline {
+            background-color: #ff0000; /* Red */
+        }
+        .server-details {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minecraft Server Details</h1>
+    <div class="server-details" id="serverDetails">
+        <!-- Server details will be displayed here -->
+    </div>
+
+    <script>
+        // Make an AJAX request to mcsrvstat API
+        var request = new XMLHttpRequest();
+        request.open('GET', 'https://api.mcsrvstat.us/3/N5.MCST.IO:25597', true);
+
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                // Success! Parse JSON response
+                var data = JSON.parse(request.responseText);
+                displayServerDetails(data);
+            } else {
+                // Error handling
+                console.error('Failed to fetch server details.');
+            }
+        };
+
+        request.onerror = function() {
+            // Connection error
+            console.error('Connection error.');
+        };
+
+        request.send();
+
+        // Function to display server details on the webpage
+        function displayServerDetails(data) {
+            var serverDetailsDiv = document.getElementById('serverDetails');
+            if (data.online) {
+                // Server is online
+                serverDetailsDiv.innerHTML = `
+                    <img src="${data.icon}" alt="Minecraft Server Icon" width="100">
+                    <h2>Server IP: ${data.ip}:${data.port}</h2>
+                    <h3>MOTD: ${data.motd.clean}</h3>
+                    <div class="status-circle online"></div>
+                    <p>Online</p>
+                `;
+            } else {
+                // Server is offline
+                serverDetailsDiv.innerHTML = `
+                    <h2>Server IP: ${data.ip}:${data.port}</h2>
+                    <p>Offline</p>
+                    <div class="status-circle offline"></div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
