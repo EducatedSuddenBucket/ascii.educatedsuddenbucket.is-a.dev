@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Infinite loop to keep displaying the frames
+while true; do
+    for i in {0..9}; do
+        clear  # Clear the screen
+        cat "$i.txt"  # Display the content of the current frame
+        sleep 0.1  # Pause for 0.1 seconds before the next frame
+    done
+done
