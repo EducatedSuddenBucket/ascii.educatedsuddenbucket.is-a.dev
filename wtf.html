@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educated SMP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative; /* Add this */
+        }
+        .server-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .server-icon {
+            margin-right: 20px;
+        }
+        .status-circle {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        .online {
+            background-color: #00ff00; /* Green */
+        }
+        .offline {
+            background-color: #ff0000; /* Red */
+        }
+        .server-details {
+            margin-top: 20px;
+        }
+        /* Add this */
+        .button-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .colorful-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="server-info" id="serverDetails">
+            <!-- Server details will be displayed here -->
+        </div>
+
+        <!-- Add this button container -->
+        <div class="button-container">
+            <button class="colorful-button" onclick="redirectToAnotherPage()">Players</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to redirect to another page
+    function redirectToAnotherPage() {
+        window.location.href = 'players'; // Replace 'https://example.com' with the URL of the page you want to redirect to
+    }
+
+        // Make an AJAX request to mcsrvstat API
+        var request = new XMLHttpRequest();
+        request.open('GET', 'https://api.mcsrvstat.us/3/Darkspirit.aternos.me:26976', true);
+
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                // Success! Parse JSON response
+                var data = JSON.parse(request.responseText);
+                displayServerDetails(data);
+            } else {
+                // Error handling
+                console.error('Failed to fetch server details.');
+            }
+        };
+
+        request.onerror = function() {
+            // Connection error
+            console.error('Connection error.');
+        };
+
+        request.send();
+
+        // Function to display server details on the webpage
+        function displayServerDetails(data) {
+            var serverDetailsDiv = document.getElementById('serverDetails');
+            if (data.online) {
+                // Server is online
+                serverDetailsDiv.innerHTML = `
+                    <div class="server-icon">
+                        <img src="${data.icon}" alt="Minecraft Server Icon" width="100">
+                    </div>
+                    <div class="server-details">
+                        <h3>MOTD: ${data.motd.clean}</h3>
+                        <h2>Server IP: ${data.ip}:${data.port}</h2>
+                        <div class="status-circle online"></div>
+                        <p>Online</p>
+                    </div>
+                `;
+            } else {
+                // Server is offline
+                serverDetailsDiv.innerHTML = `
+                    <div class="server-icon">
+                        <img src="${data.icon}" alt="Minecraft Server Icon" width="100">
+                    </div>
+                    <div class="server-details">
+                        <h2>Server IP: ${data.ip}:${data.port}</h2>
+                        <p>Offline</p>
+                        <div class="status-circle offline"></div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
