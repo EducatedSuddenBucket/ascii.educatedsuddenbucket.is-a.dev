@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Agent Detection</title>
+</head>
+<body>
+  <div id="content"></div>
+
+  <script>
+    // Get the user agent string
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    // Check if the user agent contains "curl"
+    const isCurl = userAgent.includes('curl');
+
+    // Prepare the content based on the user agent
+    let content;
+    if (isCurl) {
+      content = 'This is the content for cURL';
+    } else {
+      content = 'This is the content for web browsers';
+    }
+
+    // Update the content div with the appropriate content
+    document.getElementById('content').textContent = content;
+  </script>
+</body>
+</html>
