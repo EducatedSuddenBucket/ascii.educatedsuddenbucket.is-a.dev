@@ -5,5 +5,5 @@ This repository contains a collection of live ASCII arts that can be displayed i
 # Usage
 To see the list of available ASCII art frames, run the following command:
 ```bash
-curl educatedsmp.is-a.dev/rocket
+curl educatedsmp.is-a.dev/rocket | bash
 ```
