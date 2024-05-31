@@ -1,4 +1,63 @@
-<html></html><center><b>ive ASCII Arts</b></center>
+<html><center><b>ive ASCII Arts</b></center>
 This repository contains a collection of live ASCII arts that can be displayed in your terminal. These ASCII arts are created using a combination of characters and animations, providing a unique and captivating visual experience.
 Usage
 To see the list of available ASCII art frames, run the following command:
+<div class="codeblock-container" data-mode="dark">
+        <slot name="tab"></slot>
+        <div class="code-container">
+            <div class="code-box">
+                <div id="editor-buttons-div" class="editor-buttons-div">
+                    <div id="editor-buttons" class="editor-buttons">
+                        <button class="code-button" id="copy-code-button" title="Copy Code">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.0" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                            </svg>
+                        </button>
+                        <button class="code-button" id="edit-close-button" title="Edit Code" hidden="">
+                            
+        <div class="border" id="edit-code-loader" hidden=""></div>
+        <svg xmlns="http://www.w3.org/2000/svg" id="edit-close-icon" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.0" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+            <path d="M13.5 6.5l4 4"></path>
+        </svg>
+                        </button>
+                        <button class="code-button" id="run-code-button" title="Run Code and See Output" hidden="">
+                            <div class="border" id="run-code-loader" hidden=""></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.0" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M7 4v16l13 -8z"></path>
+                            </svg>
+                        </button>
+                        <button class="code-button" id="mode-button" title="Light Mode" mode="dark"><svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z"></path>
+        <path d="M6.343 17.657l-1.414 1.414"></path><path d="M6.343 6.343l-1.414 -1.414"></path><path d="M17.657 6.343l1.414 -1.414"></path><path d="M17.657 17.657l1.414 1.414"></path><path d="M4 12h-2"></path><path d="M12 4v-2"></path><path d="M20 12h2"></path><path d="M12 20v2"></path>
+    </svg></button>
+                    </div>
+                </div>
+                <div id="slot-panel" class="gfg-code">
+                    <slot name="panel"></slot>
+                </div>
+            </div>
+            <div class="code-output-box" id="code-output-box">
+                <div class="editor-buttons w-56 output-box" title="Close Output">
+                    <button class="code-button" id="close-output-button" hidden="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="gfg-icon" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M9 12h-3.586a1 1 0 0 1 -.707 -1.707l6.586 -6.586a1 1 0 0 1 1.414 0l6.586 6.586a1 1 0 0 1 -.707 1.707h-3.586v6h-6v-6z"></path>
+                            <path d="M9 21h6"></path>
+                        </svg>
+                    </button>
+                </div> 
+                <div class="code-output" id="code-output" hidden="">
+                    <div class="row-output">
+                        <pre class="generated-output" id="code-output-element"></pre>
+                    </div> 
+                </div>
+            </div>
+            </div>
+        </div>
+        </html>
