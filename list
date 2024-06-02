@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "The following frames are available"
+echo "1. particles"
+echo "2. rocket"
